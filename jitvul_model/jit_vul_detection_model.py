@@ -79,9 +79,8 @@ def train(curr_epochs, _trainLoader, model, criterion, optimizer, device):
             graph =  graph.subgraph(torch.LongTensor(list(range(0, 1500))))
         # if index % 500 == 0:
         #     print("curr: {}".format(index) + " train loss: {}".format(train_loss / (index + 1)) + " acc:{}".format(correct / (index + 1)))
-        if device != torch.device('cpu'):
-            
-            graph = graph.to('mps')
+        if device != 'cpu':
+            graph = graph.cuda()
         # if graph.y.item() == 1:
         #     target = torch.tensor([[0,1]],dtype=float)
         # else:
@@ -140,8 +139,8 @@ def evaluate_metrics(model_name, model, _loader, device):
         for graph, commit_id, index in _loader:
             if graph.num_nodes > 1500:
                 graph =  graph.subgraph(torch.LongTensor(list(range(0, 1500))))
-            if device != torch.device('cpu'):
-                graph = graph.to('mps')
+            if device != 'cpu':
+                graph = graph.cuda()
             target = graph.y
             if graph.num_nodes == 0 or graph.num_edges == 0:
                 print(commit_id)
