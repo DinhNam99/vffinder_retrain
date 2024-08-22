@@ -3,7 +3,7 @@
 
 void vulnerable_function(char *input) {
     char buffer[10];
-    strcpy(buffer, input);  // Copy chuỗi input vào buffer mà không kiểm tra độ dài
+    strcpy(buffer, input);
     printf("Buffer content: %s\n", buffer);
 }
 
