@@ -3,7 +3,8 @@
 
 void vulnerable_function(char *input) {
     char buffer[10];
-    strcpy(buffer, input);
+    strncpy(buffer, input, sizeof(buffer) - 1);
+    buffer[sizeof(buffer) - 1] = '\0';
     printf("Buffer content: %s\n", buffer);
 }
 
